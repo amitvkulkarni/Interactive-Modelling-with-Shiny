@@ -1,2 +1,15 @@
 # Interactive-Modelling-with-Shiny
-R Shiny to build an app for data exploration, interactive model building app, identifying variable importance and predicting
+R Shiny to build an app for data exploration, interactive model building app, identifying variable importance and predicting.
+
+Step1: Select the prefered train/test data split on the left panel. </br>
+Step2: Select the independent and dependent variables from the dropdowns
+![alt text](https://github.com/amitvkulkarni/Interactive-Modelling-with-Shiny/blob/main/Images/HomePage.PNG)
+
+Navigate to respective tabs to view the result: </br>
+![alt text](https://github.com/amitvkulkarni/Interactive-Modelling-with-Shiny/blob/main/Images/DataSummary.PNG)
+Correlation plot:</br>
+![alt text](https://github.com/amitvkulkarni/Interactive-Modelling-with-Shiny/blob/main/Images/Correlation.PNG)
+Select various combinations of X and Y variables to build model: </br>
+![alt text](https://github.com/amitvkulkarni/Interactive-Modelling-with-Shiny/blob/main/Images/Model.PNG)
+Prediction on test data:</br>
+![alt text](https://github.com/amitvkulkarni/Interactive-Modelling-with-Shiny/blob/main/Images/prediction.PNG)
