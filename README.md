@@ -1,6 +1,8 @@
 # Interactive-Modelling-with-Shiny
 R Shiny application for data exploration, interactive model building, identifying variable importance and predicting on test data.
 
+## [**Read more on this in my blog**](https://www.analyticsvidhya.com/blog/2021/05/build-interactive-models-with-r-shiny/)
+
 Step1: Select the prefered train/test data split on the left panel. </br>
 Step2: Select the independent and dependent variables from the dropdowns </br>
 ![alt text](https://github.com/amitvkulkarni/Interactive-Modelling-with-Shiny/blob/main/Images/HomePage.PNG)
