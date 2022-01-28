@@ -14,29 +14,6 @@ library(stargazer)
 dd <- mtcars
 
 shinyServer(function(input, output, session) {
-  ##-------------------------Dynamic report generation-------------------------------------------
-  # output$report <- downloadHandler(
-  #   # For PDF output, change this to "report.pdf"
-  #   filename = paste("report", sep = ".", "html"),
-  #   content = function(file) {
-  #     # Copy the report file to a temporary directory before processing it, in
-  #     # case we don't have write permissions to the current working dir (which
-  #     # can happen when deployed).
-  #     tempReport <- file.path(tempdir(), "report.Rmd")
-  #     file.copy("report.Rmd", tempReport, overwrite = TRUE)
-  #     
-  #     # Set up parameters to pass to Rmd document
-  #     #params <- list(n = input$selectData)
-  #     
-  #     # Knit the document, passing in the `params` list, and eval it in a
-  #     # child of the global environment (this isolates the code in the document
-  #     # from the code in this app).
-  #     rmarkdown::render(tempReport,
-  #                       output_file = file,
-  #                       
-  #                       envir = new.env(parent = globalenv()))
-  #   }
-  # )
   
   InputDataset <- reactive({
     mtcars
@@ -52,20 +29,7 @@ shinyServer(function(input, output, session) {
     }
     
   })
-  
-  
-  #
-  # output$SelectX <-  renderUI({
-  #   box(selectizeInput("SelectX", label = "Select variables:",choices = names(InputDataset_model()), selected = 1,multiple = TRUE),
-  #       solidHeader = TRUE, width = "3", status = "primary", title = "X variable")
-  # })
-  #
-  # output$SelectY <-  renderUI({
-  #   box(selectizeInput("SelectY", label = "Select variable to predict:",choices = names(InputDataset_model()), selected = 1, multiple = FALSE),
-  #     solidHeader = TRUE, width = "3", status = "primary", title = "Y variable")
-  # })
-  #
-  
+ 
   
   observe({
     lstname <- names(InputDataset())
@@ -128,13 +92,6 @@ shinyServer(function(input, output, session) {
       method = "number"
     ))
   
-  correlationMatrix <- reactive({
-    cor(InputDataset())
-  })
-  output$CorrMatrix <-
-    renderPrint(round(as.data.frame(correlationMatrix())), 4)
-  
-  
   
   #Code section for Linear Regression-----------------------------------------------------------------------------
   
@@ -142,18 +99,7 @@ shinyServer(function(input, output, session) {
     as.formula(paste(input$SelectY, "~."))
   })
   
-  #observe({print(f())})
-  
-  # tmp_model <- lm(mpg ~., data = mtcars)
-  # vardt <- as.data.frame(varImp(tmp_model, scale = FALSE))
-  # varnames <- as.data.frame(rownames(vardt))
-  # impvalue <- as.data.frame(vardt$Overall)
-  # FinalVal <- cbind(varnames,impvalue)
-  
-  
-  
-  
-  
+    
   Linear_Model <- reactive({
     lm(f(), data = trainingData())
   })
@@ -175,7 +121,7 @@ shinyServer(function(input, output, session) {
   })
   
   tmpImp <- reactive({
-    #varImp(Linear_Model())
+
     imp <- as.data.frame(varImp(Linear_Model()))
     imp <- data.frame(overall = imp$Overall,
                       names   = rownames(imp))
@@ -228,10 +174,8 @@ shinyServer(function(input, output, session) {
   output$digest <- renderExplorer({
     
     explorer(data = dd$data, demo = F)
-    #codebook(mtcars) 
-  })
-  
-  
-  
+    
+  })  
   
 })
+
